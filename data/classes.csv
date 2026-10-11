@@ -1,0 +1,26 @@
+course,type,day,start,end,location_code,room,building_name,address,building_number,floor,map_link,status,priority,attendance
+Behind the Secrets for LLMs,Lecture,Monday,09:20,10:50,FOE/0244/H,Room 244,Fritz-Foerster-Bau (FOE),Mommsenstr. 6,1231,Floor 3,https://maps.app.goo.gl/9h52dQExXdiFGXbi9,Confirmed,High,Attend
+Foundation of Knowledge Representation,Exercise,Monday,09:20,10:50,APB/E005/U,E005,Andreas-Pfitzmann-Bau (APB),Nöthnitzer Str. 46,,,https://maps.app.goo.gl/z7MqFFnzoPoistio6,Confirmed,Low,Conflict - skip
+Computer Vision I,Lecture,Monday,11:10,12:40,HSZ/AUDI/H,Auditorium,Hörsaalzentrum (HSZ),,,,https://maps.app.goo.gl/FJVV8QXLzVxFrbAB6,Confirmed,,Attend
+Complexity Theory,Lecture,Monday,13:00,14:30,APB/E005/U,E005,Andreas-Pfitzmann-Bau (APB),Nöthnitzer Str. 46,,,https://maps.app.goo.gl/z7MqFFnzoPoistio6,Confirmed,,Attend
+Behind the Secrets for LLMs,Exercise,Monday,14:50,16:20,APB/E023,E023,Andreas-Pfitzmann-Bau (APB),Nöthnitzer Str. 46,,,https://maps.app.goo.gl/z7MqFFnzoPoistio6,Confirmed,,Attend
+Foundation of Knowledge Representation,Lecture,Monday,14:50,16:40,APB/E005/U,E005,Andreas-Pfitzmann-Bau (APB),Nöthnitzer Str. 46,,,https://maps.app.goo.gl/z7MqFFnzoPoistio6,Confirmed,,Attend
+IoT Communication,Lecture,Tuesday,09:20,10:50,TBD,TBD,TBD,,,,,Location unknown,,Attend
+Justice and Protest,Lecture,Tuesday,13:00,14:30,ABS/2-01,2-01,ABS building,,,,https://maps.app.goo.gl/82iLJSeeSQfMHSWd7,Confirmed,High,Attend
+Computer Vision I,Exercise,Tuesday,13:00,14:30,SCH/A215/H,A215,Schnorrstraße building (SCH),,,,https://maps.app.goo.gl/p1c7A6zHZ2nvbsSw7,Confirmed,Low,Conflict - skip
+Blockchain Technology,Lecture,Tuesday,14:50,16:20,SCH/A215/H,A215,Schnorrstraße building (SCH),,,,https://maps.app.goo.gl/p1c7A6zHZ2nvbsSw7,Confirmed,High,Attend
+Design Patterns and Frameworks,Lecture,Tuesday,14:50,16:20,APB/E023,E023,Andreas-Pfitzmann-Bau (APB),Nöthnitzer Str. 46,,,https://maps.app.goo.gl/z7MqFFnzoPoistio6,Confirmed,Low,Conflict - skip
+Blockchain Technology,Exercise,Tuesday,16:40,18:10,SCH/A215/H,A215,Schnorrstraße building (SCH),,,,https://maps.app.goo.gl/p1c7A6zHZ2nvbsSw7,Confirmed,High,Attend
+IoT Communication,Exercise,Tuesday,16:40,18:10,TBD,TBD,TBD,,,,,Location unknown,Low,Conflict - skip
+Requirement Engineering and Testing,Lecture,Wednesday,09:20,10:50,APB/E001,E001,Andreas-Pfitzmann-Bau (APB),Nöthnitzer Str. 46,,,https://maps.app.goo.gl/z7MqFFnzoPoistio6,Confirmed,,Attend
+Requirement Engineering and Testing,Exercise,Wednesday,11:10,12:40,APB/E001,E001,Andreas-Pfitzmann-Bau (APB),Nöthnitzer Str. 46,,,https://maps.app.goo.gl/z7MqFFnzoPoistio6,Confirmed,,Attend
+Data Visualization,Lecture,Wednesday,13:00,14:30,APB/E023/U,E023,Andreas-Pfitzmann-Bau (APB),Nöthnitzer Str. 46,,,https://maps.app.goo.gl/z7MqFFnzoPoistio6,Confirmed,,Attend
+User Interface Engineering,Exercise,Wednesday,14:50,16:20,APB/E023,E023,Andreas-Pfitzmann-Bau (APB),Nöthnitzer Str. 46,,,https://maps.app.goo.gl/z7MqFFnzoPoistio6,Confirmed,High,Attend
+Data Visualization,Exercise,Wednesday,14:50,16:20,APB/E023/U,E023,Andreas-Pfitzmann-Bau (APB),Nöthnitzer Str. 46,,,https://maps.app.goo.gl/z7MqFFnzoPoistio6,Confirmed,Medium,Conflict - lower priority
+Design Patterns and Frameworks,Exercise,Wednesday,14:50,16:20,Online,Online,Online,,,,,Online,Low,Conflict - skip
+IT Security in Cloud Computing,Lecture,Thursday,09:20,10:50,APB/E001,E001,Andreas-Pfitzmann-Bau (APB),Nöthnitzer Str. 46,,,https://maps.app.goo.gl/z7MqFFnzoPoistio6,Confirmed,,Attend
+German A1.1,Course,Thursday,13:00,14:30,SE1/0028,0028,SE1 building,,,,https://maps.app.goo.gl/BRsSUikhFHpsyTVS7,Confirmed,,Attend
+Machine Learning I,Exercise,Thursday,14:50,16:40,BAR/SCHO/E,SCHO/E,Bähr building (BAR),,,,https://maps.app.goo.gl/6ZoD2kUxwA6g4hms8,Confirmed,,Attend
+Machine Learning I,Lecture,Friday,09:20,10:50,TRE/PHYS/E,PHYS/E,TRE building,,,,https://maps.app.goo.gl/3ixV7NPQUVGaDkSq5,Confirmed,,Attend
+German A1.1,Course,Friday,13:00,14:30,SE1/0028,0028,SE1 building,,,,https://maps.app.goo.gl/BRsSUikhFHpsyTVS7,Confirmed,High,Attend
+User Interface Engineering,Lecture,Friday,13:00,14:30,APB/E023/U,E023,Andreas-Pfitzmann-Bau (APB),Nöthnitzer Str. 46,,,https://maps.app.goo.gl/z7MqFFnzoPoistio6,Confirmed,Low,Conflict - skip
