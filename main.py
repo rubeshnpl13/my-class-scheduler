@@ -4,6 +4,13 @@ from datetime import datetime, timedelta
 import pandas as pd
 import streamlit as st
 
+st.set_page_config(
+    page_title="Semester Dashboard",
+    page_icon="🎓",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
 st.markdown(
     """
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -12,18 +19,12 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 st.markdown(
     """
     <link rel="apple-touch-icon" href="static/apple-touch-icons.png">
     """,
     unsafe_allow_html=True,
-)
-
-st.set_page_config(
-    page_title="Semester Dashboard",
-    page_icon="🎓",
-    layout="wide",
-    initial_sidebar_state="expanded",
 )
 
 CSV_PATH = "data/classes.csv"
@@ -66,12 +67,14 @@ def load_classes(path: str) -> pd.DataFrame:
     df["start_time"] = pd.to_datetime(df["start"], format="%H:%M").dt.time
     df["end_time"] = pd.to_datetime(df["end"], format="%H:%M").dt.time
     df["day"] = pd.Categorical(df["day"], categories=DAYS, ordered=True)
+
     return df
 
 
 def format_duration(start_time, end_time):
     start = timedelta(hours=start_time.hour, minutes=start_time.minute)
     end = timedelta(hours=end_time.hour, minutes=end_time.minute)
+
     minutes = int((end - start).total_seconds() // 60)
     hours, mins = divmod(minutes, 60)
 
@@ -79,12 +82,12 @@ def format_duration(start_time, end_time):
         return f"{hours} h {mins} min"
     if hours:
         return f"{hours} h"
+
     return f"{mins} min"
 
 
 def class_card(row, highlight=False):
     color = TYPE_COLORS.get(row["type"], "#607d8b")
-    border = "2px solid #ff4b4b" if highlight else "1px solid rgba(128,128,128,0.3)"
 
     with st.container(border=True):
         cols = st.columns([0.18, 0.52, 0.30])
@@ -125,7 +128,7 @@ def class_card(row, highlight=False):
         if pd.notna(row["building_number"]) and str(row["building_number"]).strip():
             details.append(f"🔢 Building no. {row['building_number']}")
 
-        if row["priority"]:
+        if pd.notna(row["priority"]) and str(row["priority"]).strip():
             details.append(f"⭐ Priority: **{row['priority']}**")
 
         if row["attendance"] != "Attend":
@@ -154,6 +157,7 @@ def next_class_card(today_df):
         return
 
     row = upcoming.iloc[0]
+
     now_dt = datetime.combine(datetime.today(), now)
     start_dt = datetime.combine(datetime.today(), row["start_time"])
     minutes_left = int((start_dt - now_dt).total_seconds() // 60)
@@ -178,9 +182,16 @@ def next_class_card(today_df):
 df = load_classes(CSV_PATH)
 
 today_name = datetime.now().strftime("%A")
+tomorrow_name = (datetime.now() + timedelta(days=1)).strftime("%A")
+
 today_df = df[df["day"] == today_name].copy()
-attended_today = today_df[today_df["attendance"] == "Attend"].sort_values("start_time")
-conflicts_today = today_df[today_df["attendance"] != "Attend"].sort_values("start_time")
+attended_today = today_df[
+    today_df["attendance"] == "Attend"
+].sort_values("start_time")
+
+conflicts_today = today_df[
+    today_df["attendance"] != "Attend"
+].sort_values("start_time")
 
 with st.sidebar:
     st.title("🎓 Semester Dashboard")
@@ -189,6 +200,7 @@ with st.sidebar:
     st.divider()
 
     st.subheader("Filters")
+
     selected_types = st.multiselect(
         "Class type",
         options=sorted(df["type"].dropna().unique()),
@@ -203,12 +215,14 @@ with st.sidebar:
     st.divider()
 
     st.subheader("Quick stats")
+
     st.metric("Total sessions", len(df))
     st.metric("Courses", df["course"].nunique())
     st.metric("Today’s classes", len(attended_today))
     st.metric("Conflict sessions", (df["attendance"] != "Attend").sum())
 
     st.divider()
+
     st.caption(
         "Data source: `data/classes.csv`. "
         "Update the CSV and refresh this page to see changes."
@@ -219,8 +233,15 @@ filtered_df = df[df["type"].isin(selected_types)].copy()
 if show_only_attend:
     filtered_df = filtered_df[filtered_df["attendance"] == "Attend"]
 
-tab_today, tab_week, tab_locations, tab_conflicts, tab_data = st.tabs(
-    ["📅 Today", "🗓 Weekly timetable", "📍 Buildings", "⚠️ Conflicts", "📊 All data"]
+tab_today, tab_tomorrow, tab_week, tab_locations, tab_conflicts, tab_data = st.tabs(
+    [
+        "📅 Today",
+        "⏭ Tomorrow",
+        "🗓 Weekly timetable",
+        "📍 Buildings",
+        "⚠️ Conflicts",
+        "📊 All data",
+    ]
 )
 
 with tab_today:
@@ -230,14 +251,55 @@ with tab_today:
         st.info("No classes you plan to attend today.")
     else:
         next_class_card(attended_today)
+
         st.subheader("Schedule")
+
         for _, row in attended_today.iterrows():
             class_card(row)
 
     if not conflicts_today.empty and not show_only_attend:
         st.subheader("Lower-priority sessions today")
         st.caption("These overlap with a class you marked as higher priority.")
+
         for _, row in conflicts_today.iterrows():
+            class_card(row, highlight=True)
+
+with tab_tomorrow:
+    st.header(f"Tomorrow — {tomorrow_name}")
+
+    tomorrow_df = filtered_df[filtered_df["day"] == tomorrow_name].copy()
+
+    tomorrow_attended = tomorrow_df[
+        tomorrow_df["attendance"] == "Attend"
+    ].sort_values("start_time")
+
+    tomorrow_conflicts = tomorrow_df[
+        tomorrow_df["attendance"] != "Attend"
+    ].sort_values("start_time")
+
+    if tomorrow_attended.empty:
+        st.info("No classes you plan to attend tomorrow.")
+    else:
+        first_class = tomorrow_attended.iloc[0]
+
+        st.success(
+            f"""
+            **First class tomorrow:** {first_class['course']} — {first_class['type']}  
+            **{first_class['start']}–{first_class['end']}**  
+            **Where:** {first_class['building_name']}, Room {first_class['room']}
+            """
+        )
+
+        st.subheader("Schedule")
+
+        for _, row in tomorrow_attended.iterrows():
+            class_card(row)
+
+    if not tomorrow_conflicts.empty and not show_only_attend:
+        st.subheader("Lower-priority sessions tomorrow")
+        st.caption("These overlap with a class you marked as higher priority.")
+
+        for _, row in tomorrow_conflicts.iterrows():
             class_card(row, highlight=True)
 
 with tab_week:
@@ -301,7 +363,9 @@ with tab_locations:
 with tab_conflicts:
     st.header("Schedule conflicts")
 
-    conflict_df = df[df["attendance"] != "Attend"].sort_values(["day", "start_time"])
+    conflict_df = df[df["attendance"] != "Attend"].sort_values(
+        ["day", "start_time"]
+    )
 
     if conflict_df.empty:
         st.success("No conflicts in your current schedule.")
@@ -347,7 +411,11 @@ with tab_data:
         },
     )
 
-    csv_bytes = df.drop(columns=["start_time", "end_time"]).to_csv(index=False).encode("utf-8")
+    csv_bytes = (
+        df.drop(columns=["start_time", "end_time"])
+        .to_csv(index=False)
+        .encode("utf-8")
+    )
 
     st.download_button(
         label="Download current schedule as CSV",
