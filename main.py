@@ -4,6 +4,21 @@ from datetime import datetime, timedelta
 import pandas as pd
 import streamlit as st
 
+st.markdown(
+    """
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Semester">
+    """,
+    unsafe_allow_html=True,
+)
+st.markdown(
+    """
+    <link rel="apple-touch-icon" href="static/apple-touch-icons.png">
+    """,
+    unsafe_allow_html=True,
+)
+
 st.set_page_config(
     page_title="Semester Dashboard",
     page_icon="🎓",
